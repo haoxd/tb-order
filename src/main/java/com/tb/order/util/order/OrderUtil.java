@@ -21,7 +21,7 @@ public class OrderUtil {
 	 * @param userId：用户id
 	 * @return
 	 */
-	public static  String getOrderId(Long userId){
+	public static synchronized  String getOrderId(Long userId){
 			Date date=new Date();
 			String time=new SimpleDateFormat("yyyyM").format(date);
 			return  time+System.currentTimeMillis()+userId ;

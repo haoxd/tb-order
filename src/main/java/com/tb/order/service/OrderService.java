@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.tb.order.bean.TaotaoResult;
+import com.tb.order.bean.HTResult;
 import com.tb.order.dao.IOrder;
 import com.tb.order.pojo.Order;
 import com.tb.order.pojo.PageResult;
@@ -26,14 +26,14 @@ public class OrderService {
 	// @Autowired
 	// private RabbitTemplate rabbitTemplate;
 
-	public TaotaoResult createOrder(String json) throws Exception {
+	public HTResult createOrder(String json) throws Exception {
 		Order order = null;
 		try {
 			order = objectMapper.readValue(json, Order.class);
 			// 校验Order对象
 			ValidateUtil.validate(order);
 		} catch (Exception e) {
-			return TaotaoResult.build(400, "请求参数有误!");
+			return HTResult.build(400, "请求参数有误!");
 		}
 
 		String orderId = OrderUtil.getOrderId(order.getUserId());
@@ -65,9 +65,9 @@ public class OrderService {
 		// this.rabbitTemplate.convertAndSend(objectMapper.writeValueAsString(msg));
 
 		if (i > 0) {
-			return TaotaoResult.ok(orderId);
+			return HTResult.ok(orderId);
 		}
-		return TaotaoResult.build(400, "保存订单失败!");
+		return HTResult.build(400, "保存订单失败!");
 	}
 
 	public Order queryOrderById(String orderId) {

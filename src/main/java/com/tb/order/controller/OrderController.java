@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.tb.order.bean.TaotaoResult;
+import com.tb.order.bean.HTResult;
 import com.tb.order.pojo.Order;
 import com.tb.order.pojo.PageResult;
 import com.tb.order.pojo.ResultMsg;
@@ -30,11 +30,11 @@ public class OrderController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/create" , method = RequestMethod.POST)
-	public TaotaoResult createOrder(@RequestBody String json) {
+	public HTResult createOrder(@RequestBody String json) {
 		try {
 			return orderService.createOrder(json);
 		} catch (Exception e) {
-			return TaotaoResult.build(400, e.getMessage());
+			return HTResult.build(400, e.getMessage());
 		}
 		
 	}
